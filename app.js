@@ -77,13 +77,34 @@ for(let i=0 ; i<phones.length; i++){
     <p class="card-text">ROM: ${phones[i].rom + "GB"}</p>
     <p class="card-text">Camera: ${phones[i].camera}</p>
     <p class="card-text">Price: ${phones[i].price + " PKR"}</p>
-  <button type="button" class="btn btn-warning funct" onclick="clickFunct(${i})">Add to cart <i class="fa-solid fa-cart-shopping text-secondary"></i></button>
+  <button type="button" class="btn btn-warning" onclick="funct(${i})">Add to cart <i class="fa-solid fa-cart-shopping text-secondary"></i></button>
   </div>
 </div>
     </div>`;
 
+
 }
 
+
+function funct(index){
+  let cart = [];
+
+  cart.push(phones[index]);
+
+  console.log(cart);
+  
+
+}
+
+const cart = document.querySelector("#cart").addEventListener('click' , function(){
+  window.location="cart.html"
+})
+
+
+
+
+
+  
 
 
 

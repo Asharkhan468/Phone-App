@@ -65,12 +65,10 @@ const phones = [
   },
 ];
 
-
 let div = document.querySelector("#div");
 
-
-for(let i=0 ; i<phones.length; i++){
-    div.innerHTML += `<div class="card" style="width: 18rem;">
+for (let i = 0; i < phones.length; i++) {
+  div.innerHTML += `<div class="card" style="width: 18rem;">
   <div class="card-body bg-dark text-light">
     <h5 class="card-title">${phones[i].brand + " " + phones[i].model}</h5>
     <p class="card-text">RAM: ${phones[i].ram + "GB"}</p>
@@ -81,44 +79,17 @@ for(let i=0 ; i<phones.length; i++){
   </div>
 </div>
     </div>`;
-
-
 }
-
-
-function funct(index){
-  let cart = [];
-
+let cart = [];
+function funct(index) {
   cart.push(phones[index]);
 
   console.log(cart);
-  
-
 }
 
-const cart = document.querySelector("#cart").addEventListener('click' , function(){
-  window.location="cart.html"
-})
-
-
-
-
-
-  
-
-
-
-
-// function clickFunct(index){
-//   let cart = [];
-  
-  
-// }
-
-
-
-
-
-
-
+const cartdata = document
+  .querySelector("#cart")
+  .addEventListener("click", function () {
+    window.location = "cart.html";
+  });
 

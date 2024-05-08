@@ -65,9 +65,14 @@ const phones = [
   },
 ];
 
+
+
+
+
 let div = document.querySelector("#div");
 
 for (let i = 0; i < phones.length; i++) {
+  phones[i].quantity=1;
   div.innerHTML += `<div class="card" style="width: 18rem;">
   <div class="card-body bg-dark text-light">
     <h5 class="card-title">${phones[i].brand + " " + phones[i].model}</h5>
@@ -75,14 +80,25 @@ for (let i = 0; i < phones.length; i++) {
     <p class="card-text">ROM: ${phones[i].rom + "GB"}</p>
     <p class="card-text">Camera: ${phones[i].camera}</p>
     <p class="card-text">Price: ${phones[i].price + " PKR"}</p>
+    <p class="card-text">Quantity: ${phones[i].quant}</p>
   <button type="button" class="btn btn-warning" onclick="funct(${i})">Add to cart <i class="fa-solid fa-cart-shopping text-secondary"></i></button>
   </div>
 </div>
     </div>`;
+
 }
+
 let cart = [];
 function funct(index) {
   cart.push(phones[index]);
+
+  if(cart.includes(phones[index])==true){
+    phones[index] + 1;
+  }else{
+    cart.push(phones[index]);
+  }
+
+
 
   console.log(cart);
 }

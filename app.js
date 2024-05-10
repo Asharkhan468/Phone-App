@@ -80,6 +80,16 @@ const phones = [
   },
 ];
 
+let arr;
+let items = JSON.parse(localStorage.getItem("cartItem"));
+if (cart === null) {
+  arr = [];
+} else {
+  arr = cart;
+}
+
+
+
 let div = document.querySelector("#div");
 
 for (let i = 0; i < phones.length; i++) {
@@ -112,5 +122,10 @@ function funct(index) {
 const cartdata = document
   .querySelector("#cart")
   .addEventListener("click", function () {
+  localStorage.setItem('cartItem' , JSON.stringify(cart));
     window.location = "cart.html";
   });
+
+
+  
+

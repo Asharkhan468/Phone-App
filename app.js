@@ -81,11 +81,11 @@ const phones = [
 ];
 
 let arr;
-let items = JSON.parse(localStorage.getItem("cartItem"));
+let items = JSON.parse(localStorage.getItem("cartitem"));
 if (cart === null) {
   arr = [];
 } else {
-  arr = cart;
+  arr = items;
 }
 
 
@@ -122,10 +122,9 @@ function funct(index) {
 const cartdata = document
   .querySelector("#cart")
   .addEventListener("click", function () {
-  localStorage.setItem('cartItem' , JSON.stringify(cart));
+  localStorage.setItem('cartitem' , JSON.stringify(cart));
     window.location = "cart.html";
   });
 
 
   
-

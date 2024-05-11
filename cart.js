@@ -1,5 +1,5 @@
 let arr;
-let cartarray = JSON.parse(localStorage.getItem('cartItem'));
+let cartarray = JSON.parse(localStorage.getItem('cartitem'));
 
 const cartdata = document.querySelector("#cart-item");
 

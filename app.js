@@ -82,7 +82,7 @@ const phones = [
 
 let arr;
 let items = JSON.parse(localStorage.getItem("cartitem"));
-if (cart === null) {
+if (items === null) {
   arr = [];
 } else {
   arr = items;
@@ -110,11 +110,11 @@ for (let i = 0; i < phones.length; i++) {
 
 let cart = [];
 function funct(index) {
-  if (cart.includes(phones[index])) {
+  if (arr.includes(phones[index])) {
     phones[index].quantity += 1;
   } else {
     phones[index].quantity = 1;
-    cart.push(phones[index]);
+    arr.push(phones[index]);
   }
   console.log(cart);
 }
@@ -122,7 +122,7 @@ function funct(index) {
 const cartdata = document
   .querySelector("#cart")
   .addEventListener("click", function () {
-  localStorage.setItem('cartitem' , JSON.stringify(cart));
+  localStorage.setItem('cartitem' , JSON.stringify(arr));
     window.location = "cart.html";
   });
 

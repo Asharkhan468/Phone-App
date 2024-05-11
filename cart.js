@@ -1,10 +1,10 @@
-let arr;
+
 let cartarray = JSON.parse(localStorage.getItem('cartitem'));
 
 const cartdata = document.querySelector("#cart-item");
 
 function renderItem(){
-if(cartarray!=null && cartarray.length>0){
+if(cartarray!=null && cartarray.length > 0){
     for(let i=0; i<cartarray.length; i++){
         cartdata.innerHTML += `<div class="card mt-4" style="width: 18rem;">
   <div class="card-body bg-dark text-light">
@@ -24,8 +24,15 @@ if(cartarray!=null && cartarray.length>0){
 }
 
 
-renderItem()
 
+
+function removeItem(index){
+  
+  cartarray.splice(index , 0);
+  
+}
+
+renderItem()
 
  
 

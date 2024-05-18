@@ -1,5 +1,3 @@
-const image = document.getElementById("image");
-
 const phones = [
   {
     brand: "Samsung",
@@ -79,52 +77,47 @@ const phones = [
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSekC926gtNVK9G4qpaN1U3Poeo3Ds9iNW0f7Eq82ZazMI6-nuk3n2tF6umzq7LthSz6O8&usqp=CAU"),
   },
 ];
+phones.quantity=+1;
 
-let arr;
+let cart=[];
 let items = JSON.parse(localStorage.getItem("cartitem"));
-if (items === null) {
-  arr = [];
-} else {
-  arr = items;
+if(items==null){
+  cart=[];
+}else{
+  cart = items
 }
 
+console.log(items);
 
+//Render cards in div started
 
-let div = document.querySelector("#div");
+const div = document.querySelector("#div");
 
-for (let i = 0; i < phones.length; i++) {
-  phones[i].quantity = 1;
-  div.innerHTML += `<div class="card mt-4" style="width: 18rem;">
-  <div class="card-body bg-dark text-light">
-  <img src="${phones[i].image}" class="card-img-top" alt="...">
-    <h5 class="card-title mt-3">${phones[i].brand + " " + phones[i].model}</h5>
-    <p class="card-text">RAM: ${phones[i].ram + "GB"}</p>
-    <p class="card-text">ROM: ${phones[i].rom + "GB"}</p>
-    <p class="card-text">Camera: ${phones[i].camera}</p>
-    <p class="card-text">Price: ${phones[i].price + " PKR"}</p>
-  <button type="button" class="btn btn-warning" onclick="funct(${i})">Add to cart <i class="fa-solid fa-cart-shopping text-primary"></i></button>
+for(let i=0; i<phones.length; i++){
+    div.innerHTML += `<div class="card " style="width: 18rem;">
+  <img src="${phones[i].image}" class="card-img-top" alt="product-image">
+  <div class="card-body">
+    <p class="card-text">${phones[i].brand + "" + phones[i].model}</p>
+    <button type="button" class="btn btn-warning" onclick=addCart(${i})>Add To Cart</button>
   </div>
-</div>
-    </div>`;
+</div>`;
+
 }
 
-let cart = [];
-function funct(index) {
-  if (arr.includes(phones[index])) {
-    phones[index].quantity += 1;
-  } else {
-    phones[index].quantity = 1;
-    arr.push(phones[index]);
-  }
-  console.log(cart);
+function addCart(addCart){
+if(cart.includes(phones[addCart])){
+   phones[addCart].quantity+=1;
+}else{
+    phones[addCart].quantity= 1;
+   cart.push(phones[addCart]);
+}
 }
 
-const cartdata = document
-  .querySelector("#cart")
-  .addEventListener("click", function () {
-  localStorage.setItem('cartitem' , JSON.stringify(arr));
-    window.location = "cart.html";
-  });
 
 
-  
+const checkOutBtn = document.querySelector("#CheckoutBtn").addEventListener('click' , function(){
+  localStorage.setItem('cartitem', JSON.stringify(cart));
+  window.location='cart.html';
+});
+
+

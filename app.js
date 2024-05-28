@@ -77,47 +77,54 @@ const phones = [
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSekC926gtNVK9G4qpaN1U3Poeo3Ds9iNW0f7Eq82ZazMI6-nuk3n2tF6umzq7LthSz6O8&usqp=CAU"),
   },
 ];
-phones.quantity=+1;
 
-let cart=[];
-let items = JSON.parse(localStorage.getItem("cartitem"));
+phones.quantity= 1;
+
+let cart = [];
+let items = JSON.parse(localStorage.getItem("cartItem"));
+
 if(items==null){
-  cart=[];
+    cart=[];
 }else{
-  cart = items
+    cart=items
 }
 
-console.log(items);
-
-//Render cards in div started
 
 const div = document.querySelector("#div");
 
 for(let i=0; i<phones.length; i++){
-    div.innerHTML += `<div class="card " style="width: 18rem;">
-  <img src="${phones[i].image}" class="card-img-top" alt="product-image">
+    div.innerHTML += `<div class="card" style="width: 14rem;">
+  <img src="${phones[i].image}" class="card-img-top" alt="...">
   <div class="card-body">
-    <p class="card-text">${phones[i].brand + "" + phones[i].model}</p>
-    <button type="button" class="btn btn-warning" onclick=addCart(${i})>Add To Cart</button>
+    <p class="card-text">Product: ${phones[i].brand + " " + phones[i].model}</p>
+    <p class="card-text">Price: ${phones[i].price} PKR</p>
+    <button class="btn btn-warning" onclick="addToCart(${i})">ADD TO CART <i class="fa-solid fa-cart-shopping"></i></button>
   </div>
 </div>`;
-
 }
 
-function addCart(addCart){
-if(cart.includes(phones[addCart])){
-   phones[addCart].quantity+=1;
+
+
+
+
+function addToCart(cartIndex){
+
+if(cart.includes(phones[cartIndex])){
+    phones[cartIndex].quantity+=1;
 }else{
-    phones[addCart].quantity= 1;
-   cart.push(phones[addCart]);
+    cart.push(phones[cartIndex]);
+    phones[cartIndex].quantity= 1;
+
 }
 }
 
+const checkOutBtn = document.querySelector("#checkOutBtn").addEventListener('click', function(){
+    window.location="cart.html"
+    localStorage.setItem("cartItem" , JSON.stringify(cart));
+})
 
 
-const checkOutBtn = document.querySelector("#CheckoutBtn").addEventListener('click' , function(){
-  localStorage.setItem('cartitem', JSON.stringify(cart));
-  window.location='cart.html';
-});
+
+
 
 

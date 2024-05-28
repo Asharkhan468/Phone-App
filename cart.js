@@ -1,86 +1,78 @@
-let cartArray = JSON.parse(localStorage.getItem("cartitem"));
+let cartArray = JSON.parse(localStorage.getItem("cartItem"));
 
-const cartData = document.querySelector("#div2");
+
+const cartData = document.querySelector("#cartData");
+
+// console.log(cartArray);
 
 function renderArray(){
 
-if(cartArray!=null && cartArray.length > 0){
-
-    for (let i = 0; i < cartArray.length; i++) {
-      cartData.innerHTML += `<div class="card mt-4" style="width: 18rem;">
-  <div class="card-body bg-dark text-light">
-    <h5 class="card-title mt-3">${
-      cartArray[i].brand + " " + cartArray[i].model
-    }</h5>
-    <p class="card-text">RAM: ${cartArray[i].ram + "GB"}</p>
-    <p class="card-text">ROM: ${cartArray[i].rom + "GB"}</p>
-    <p class="card-text">Camera: ${cartArray[i].camera}</p>
-    <p class="card-text">Price: ${cartArray[i].price + " PKR"}</p>
-    <p class="card-text">Quantity: <button onclick="plusFunct(${i})">+</button> ${
-        cartArray[i].quantity
-      } <button onclick="subtractFunct(${i})">-</button></p>
-    <button class="btn btn-danger" onclick ="deleteItem(${i})">Remove</button>
-    <div/> `;
-    }
-
-
-}else{
-    cartData.innerHTML=`<h2 class="text-center mt-5">No Items found.....</h2>`
-}
-}
-
-function deleteItem(index) {
-  cartArray.splice(index , 1);
-  localStorage.setItem("cartitem", JSON.stringify(cartArray));
-   location.reload();
-}
-
-const totalPrice = document.querySelector("#totalamount");
-function price() {
-  let TotalPrice = 0;
+if(cartArray!=null && cartArray.length>0){
   for (let i = 0; i < cartArray.length; i++) {
-    TotalPrice = TotalPrice + cartArray[i].price * cartArray[i].quantity;
+    cartData.innerHTML += `<div class="card mt-3" style="width: 18rem;">
+  <div class="card-body bg-dark text-light">
+    <p class="card-text"> Product: ${
+      cartArray[i].brand + " " + cartArray[i].model
+    }</p>
+    <p class="card-text"> Camera: ${cartArray[i].camera}</p>
+    <p class="card-text">Ram: ${cartArray[i].ram} GB</p>
+    <p class="card-text">Rom: ${cartArray[i].rom} GB</p>
+    <p class="card-text">Quantity: <button onclick="AddQuantity(${i})">+</button> ${
+      cartArray[i].quantity
+    } <button onclick="SubQuantity(${i})">-</button></p>
+    <p class="card-text">Price: ${cartArray[i].price}</p>
+    <button class="btn btn-danger" onclick="removeBtn(${i})">Remove</button>
+  </div>
+</div>`;
   }
-  totalPrice.innerHTML = `<h3>Total Amount : ${TotalPrice} PKR</h3>`;
+}else{
+  cartData.innerHTML=`<h2 class="text-center">No Items Found.....</h2>`
 }
-price();
+}
 
-renderArray();
+renderArray()
 
-function plusFunct(plus){
+function removeBtn(index){
+  cartArray.splice(index , 1);
+   localStorage.setItem("cartItem", JSON.stringify(cartArray));
+   location.reload();
 
-  cartData.innerHTML='';
 
-  cartArray[plus].quantity+=1; 
-  
-
-  renderArray()
-  price()
 }
 
 
-function subtractFunct(subtract) {
+function AddQuantity(add) {
+  cartData.innerHTML=''
+  cartArray[add].quantity+=1;
+  renderArray();
+  total();
   
-  
-  if(cartArray[subtract].quantity===1){
-    cartArray.splice(subtract, 1);
-    localStorage.setItem("cartitem", JSON.stringify(cartArray));
+}
+
+
+function SubQuantity(sub){
+   if(cartArray[sub].quantity===1){
+    cartArray.splice(sub , 1);
+    localStorage.setItem("cartItem", JSON.stringify(cartArray));
     location.reload();
-  }
-  else{
-    cartData.innerHTML = "";
-    cartArray[subtract].quantity -= 1;
-    renderArray();
-    price();
+    total();
+   }else{
+     cartData.innerHTML = "";
+     cartArray[sub].quantity -= 1;
+     renderArray();
+     total()
     
-
-  }
-
-
+   }
 }
 
+const totalAmount= document.querySelector("#totalAmount");
+let totalPrice=0
+function total(){
 
+  for(let j=0 ; j<cartArray.length; j++){
+    totalPrice+=(cartArray[j].price*cartArray[j].quantity);
+  }
+  totalAmount.innerHTML=`<h3 class="text-light text-center mt-5">Total Amount : ${totalPrice} PKR <h3/>`
+}
 
-
-
-
+total()
